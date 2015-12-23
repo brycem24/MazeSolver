@@ -12,7 +12,6 @@ public class BearWithMe extends ApplicationAdapter {
 	SpriteBatch batch;
 	Player player;
 	Map map;
-	
 	OrthographicCamera camera;
 	
 	@Override
@@ -29,6 +28,7 @@ public class BearWithMe extends ApplicationAdapter {
 		player = new Player();
 		camera = new OrthographicCamera(800,800);
 
+		//Generate all of the map's tiles.
 		map.createWorld();
 	}
 
@@ -52,13 +52,9 @@ public class BearWithMe extends ApplicationAdapter {
 		
 		//Follow the player
 		cameraFollow();
-		
-		//System.out.println(player.position);
-			
 	}
 	
 	//Follow the player, but clamp the camera to the map's bounds. 
-	//Make sure the camera sees past the status bar.
 	private void cameraFollow() {
 		float halfWidthOfCamera = camera.viewportWidth / 2;
 		float halfHeightOfCamera = camera.viewportHeight / 2;
@@ -69,7 +65,7 @@ public class BearWithMe extends ApplicationAdapter {
 				halfHeightOfCamera, map.height - halfHeightOfCamera);
 	}
 	
-	//After the program exits, free the memory.
+	//After the progrdam exits, free the memory.
 	@Override
 	public void dispose () {
 		batch.dispose();
