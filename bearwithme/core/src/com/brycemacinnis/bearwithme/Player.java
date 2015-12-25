@@ -21,6 +21,9 @@ public class Player {
 	//The speed of the player
 	public float speed;
 	
+	public final int maxHealth = 10;
+	public int health; 
+
 	Player() {
 		//Get the player's texture from /ass
 		sprite = new Sprite(new Texture(Gdx.files.internal("Prototype.png")), 46, 72);
@@ -34,6 +37,8 @@ public class Player {
 		//Center the player
 		position = new Vector2(sprite.getWidth() * 5 ,sprite.getHeight());
 		sprite.setPosition(position.x, position.y);
+		
+		health = maxHealth;
 		
 	}
 	
@@ -113,6 +118,30 @@ public class Player {
 			return true;
 		else
 			return false;
+	}
+	
+	//This should be called by other entities.
+	//Takes as much damage as possible before death, never reaches below 0.
+	public void takeDamage(int amount) {
+		if (health - amount > 0)
+			health -= amount;
+		else if (health - amount == 0) {
+			health -= amount;
+			death();
+		}
+	}
+	
+	//Heals as much as possible until it reaches maxHealth
+	public void heal(int amount) {
+		if (health + amount <= maxHealth)
+			health += amount;
+	}
+	
+	//Turns the player into a zombie for 30 seconds until a game over screen appears.
+	private void death() {
+		sprite.setColor(Color.OLIVE);
+		speed /= 2;
+		
 	}
 
 }	
