@@ -8,17 +8,30 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class EndScreen implements Screen {
+	
+	//The font, and class for drawing text to screen.
 	BitmapFont font;
+	
 	SpriteBatch batch;
 	
-	@Override
-	public void show() {
+	//Used for resetting the screen.
+	BearWithMe game;
+	
+	public EndScreen(BearWithMe game) {
+		
+		//NO NULL REFERENCE EXCEPTIONS FOR YOU!
+		this.game = game;
 		font = new BitmapFont();
 		batch = new SpriteBatch();
 	}
 
 	@Override
+	public void show() { }
+
+	@Override
 	public void render(float delta) {
+		
+		//The black background of the game over screen.
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -27,8 +40,9 @@ public class EndScreen implements Screen {
 		font.draw(batch, "Press Space to Restart", Gdx.graphics.getWidth() * 0.455f, Gdx.graphics.getHeight() * 0.4f);
 		batch.end();
 		
+		//Reset the game
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-		
+			game.setScreen(new GameScreen(game));
 		}
 		
 		

@@ -13,8 +13,14 @@ public class Player {
 	//The texture of the player.
 	public Sprite sprite;
 	
+	//The position the player begins at.
+	public Vector2 startPosition;
+	
 	//The position the player is at, sprite is drawn here.
 	public Vector2 position;
+	
+	//The initial speed of the player before any debuffs.
+	public float initialSpeed;
 	
 	//The speed of the player
 	public float speed;
@@ -41,13 +47,18 @@ public class Player {
 		speed = 1f;
 		
 		//Center the player
-		position = new Vector2(sprite.getWidth() * 5 ,sprite.getHeight());
+		startPosition = new Vector2(100,100);
+		position = startPosition;
+		
 		sprite.setPosition(position.x, position.y);
 		
 		health = maxHealth;
 		isAlive = true;
 		
 		this.game = game;
+		
+		//Set at the beginning, to allow for resetting later on.
+		initialSpeed = speed;
 	}
 	
 	
@@ -72,8 +83,10 @@ public class Player {
 			timer += Gdx.graphics.getDeltaTime();
 			
 			//If dead for time delay show the game over screen.
-			if (timer > deathDelay)
-				game.setScreen(new EndScreen());
+			if (timer > deathDelay) {
+				game.setScreen(new EndScreen(game));
+				
+			}
 		}
 		
 
@@ -172,6 +185,15 @@ public class Player {
 		
 		//Slow the zombie down
 		speed /= 2;
+	}
+	
+	public void reset() { 
+		position = startPosition;
+		speed = initialSpeed;
+		health = maxHealth;
+		
+		//Because all healthy bears should be brown.
+		sprite.setColor(Color.BROWN);
 	}
 
 }	
