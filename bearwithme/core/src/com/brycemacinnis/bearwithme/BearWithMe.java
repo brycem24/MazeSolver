@@ -32,7 +32,7 @@ public class BearWithMe extends Game {
 		
 		//No null reference exceptions here ;)
 		map = new Map();
-		player = new Player();
+		player = new Player(this);
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
 		//Generate all of the map's tiles.
@@ -67,11 +67,12 @@ public class BearWithMe extends Game {
 		quickBar.render(hudBatch, player);
 		
 		//DEBUG ONLY
-		//if (Gdx.input.isKeyJustPressed(Input.Keys.F8))
-		//	player.takeDamage(1);
-		//else if (Gdx.input.isKeyJustPressed(Input.Keys.F9))
-		//	player.heal(1);
+		if (Gdx.input.isKeyJustPressed(Input.Keys.F8))
+			player.takeDamage(1);
+		else if (Gdx.input.isKeyJustPressed(Input.Keys.F9))
+			player.heal(1);
 		
+		super.render();
 		
 	}
 	
@@ -95,6 +96,10 @@ public class BearWithMe extends Game {
 		hudBatch.dispose();
 		quickBar.dispose();
 		map.dispose();
+	}
+	
+	public void reset() {
+		//player.position = 
 	}
 	
 }

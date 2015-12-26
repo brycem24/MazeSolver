@@ -1,7 +1,5 @@
 package com.brycemacinnis.bearwithme;
 
-
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -24,7 +22,15 @@ public class Player {
 	public final int maxHealth = 10;
 	public int health; 
 
-	Player() {
+	//For switching screens to the game over screen.
+	BearWithMe game;
+	
+	boolean isAlive;
+	
+	//The time as a zombie before the game over screen is shown.
+	float deathDelay = 25.0f;
+	
+	Player(BearWithMe game) {
 		//Get the player's texture from /ass
 		sprite = new Sprite(new Texture(Gdx.files.internal("Prototype.png")), 46, 72);
 		
@@ -39,8 +45,14 @@ public class Player {
 		sprite.setPosition(position.x, position.y);
 		
 		health = maxHealth;
+		isAlive = true;
 		
+		this.game = game;
 	}
+	
+	
+	//Timer is used to delay game over screen.
+	float timer = 0.0f;
 	
 	//Update function
 	public void render(SpriteBatch batch) {
@@ -52,6 +64,18 @@ public class Player {
 
 		//Move the player
 		handleMovement();
+		
+		//Switch screens if the player is dead after timer
+		if (!isAlive) {
+			
+			//Add time to the timer.
+			timer += Gdx.graphics.getDeltaTime();
+			
+			//If dead for time delay show the game over screen.
+			if (timer > deathDelay)
+				game.setScreen(new EndScreen());
+		}
+		
 
 	}
 	
@@ -133,15 +157,21 @@ public class Player {
 	
 	//Heals as much as possible until it reaches maxHealth
 	public void heal(int amount) {
-		if (health + amount <= maxHealth)
+		
+		//Once you are dead you can no longer heal.
+		if (health + amount <= maxHealth && isAlive)
 			health += amount;
 	}
 	
-	//Turns the player into a zombie for 30 seconds until a game over screen appears.
+	//Turns the player into a zombie for 30 seconds uwwntil a game over screen appears.
 	private void death() {
 		sprite.setColor(Color.OLIVE);
-		speed /= 2;
 		
+		//Used to prevent healing while dead and displaying game over screen.
+		isAlive = false;
+		
+		//Slow the zombie down
+		speed /= 2;
 	}
 
 }	

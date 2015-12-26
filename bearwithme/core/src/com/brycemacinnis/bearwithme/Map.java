@@ -56,9 +56,9 @@ public class Map {
 				Tile tile = null;
 				
 				if (map[i][j] == 0)
-					tile = new Tile("Water", tileTexture, Color.BLUE, i, j, true);
+					tile = new Tile("Water", tileTexture, Color.SKY, i, j, true);
 				else if (map[i][j] == 1)
-					tile = new Tile("Grass", tileTexture, Color.FOREST, i, j, false);
+					tile = new Tile("Grass", tileTexture, Color.WHITE, i, j, false);
 				else if (map[i][j] == 2)
 					tile = new Tile("Sand", tileTexture, Color.TAN, i, j, false);
 				else if (map[i][j] == 3)
