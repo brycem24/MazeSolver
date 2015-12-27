@@ -11,8 +11,8 @@ public class BearWithMe extends Game {
 		//Set the name of the window to a hilarious pun. 
 		Gdx.graphics.setTitle("Bear With Me");
 		
-		//Start the game
-		setScreen(new GameScreen(this));
+		//Start the game in the main menu
+		setScreen(new MainMenu(this));
 	}
 	
 	//Method that isn't needed but could be used for something in the future.

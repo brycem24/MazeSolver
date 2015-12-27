@@ -21,12 +21,14 @@ public class EndScreen implements Screen {
 		
 		//NO NULL REFERENCE EXCEPTIONS FOR YOU!
 		this.game = game;
-		font = new BitmapFont();
+		
+		//Generate the font from true type file.
+		font = Helper.generateFont("font.ttf", 64);
+		
 		batch = new SpriteBatch();
 	}
 
-	@Override
-	public void show() { }
+	
 
 	@Override
 	public void render(float delta) {
@@ -36,8 +38,8 @@ public class EndScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-		font.draw(batch, "Game Over!", Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.5f);
-		font.draw(batch, "Press Space to Restart", Gdx.graphics.getWidth() * 0.455f, Gdx.graphics.getHeight() * 0.4f);
+		font.draw(batch, "Game Over!", Gdx.graphics.getWidth() * 0.38f, Gdx.graphics.getHeight() * 0.8f);
+		font.draw(batch, "Press Space to Restart", Gdx.graphics.getWidth() * 0.20f, Gdx.graphics.getHeight() * 0.5f);
 		batch.end();
 		
 		//Reset the game
@@ -48,6 +50,9 @@ public class EndScreen implements Screen {
 		
 	}
 
+	@Override
+	public void show() { }
+	
 	@Override
 	public void resize(int width, int height) {}
 
