@@ -14,7 +14,7 @@ public class Tile {
 	boolean isCollider;
 
 	//The color of the tile, used in conjunction with texture.
-	Color color;
+	public Color color;
 	
 	//Where the tile is placedd
 	Vector2 position;

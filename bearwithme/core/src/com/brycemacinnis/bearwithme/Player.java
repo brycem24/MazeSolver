@@ -187,13 +187,4 @@ public class Player {
 		speed /= 2;
 	}
 	
-	public void reset() { 
-		position = startPosition;
-		speed = initialSpeed;
-		health = maxHealth;
-		
-		//Because all healthy bears should be brown.
-		sprite.setColor(Color.BROWN);
-	}
-
 }	
