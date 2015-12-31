@@ -1,38 +1,24 @@
 package com.brycemacinnis.bearwithme;
 
 public class Node {
-	public int X;
-	public int Y;
+	public int x;
+	public int y;
 	
-	public int destinationX;
-	public int destinationY;
+	public int fValue;
+	public int gValue;
+	public int hValue;
 	
 	public Node parent;
-	public int cost;
 	
-	public Node(int originX, int originY, int destinationX, int destinationY) {
-		this.X = originX;
-		this.Y = originY;
-		
-		this.destinationX = destinationX;
-		this.destinationY = destinationY;
-		
-		if (parent == null)
-			cost = 10 + ManhattanDistance(X,Y, destinationX, destinationY);
-		else
-			cost = parent.cost + 10 + ManhattanDistance(X,Y, destinationX, destinationY);
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	public boolean isCollider() {
-		if (Map.tiles[X][Y].isCollider)
+		if (Map.tiles[x][y].isCollider)
 			return true;
 		else
 			return false;
 	}
-	
-	int ManhattanDistance(float originX, float originY, float destinationX, float destinationY) {
-		return (int)(Math.abs(destinationX - originX) + Math.abs(destinationY - originY));
-	}
-
-
 }

@@ -1,13 +1,15 @@
 package com.brycemacinnis.bearwithme.entities;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.brycemacinnis.bearwithme.Map;
-import com.brycemacinnis.bearwithme.PathAlgorithm;
+import com.brycemacinnis.bearwithme.AstarAlgorithm;
+import com.brycemacinnis.bearwithme.Node;
 
 public class Zombie {
 	
@@ -17,7 +19,7 @@ public class Zombie {
 	public final int width = 46;
 	public final int height = 64;
 	
-	PathAlgorithm algorithm;
+	AstarAlgorithm algorithm;
 	
 	public Zombie() {
 	
@@ -27,7 +29,8 @@ public class Zombie {
 		//Get the sprite
 		sprite = new Sprite(new Texture(Gdx.files.internal("Prototype.png")), width, height);
 		
-		algorithm = new PathAlgorithm();
+		algorithm = new AstarAlgorithm();
+		algorithm.getPath(1,1,6,1);
 	}
 	
 	public void render(SpriteBatch batch) {
@@ -38,8 +41,9 @@ public class Zombie {
 		
 		//Move the sprite with the player.
 		sprite.setPosition(position.x, position.y);
+
 		
-		algorithm.GetPath(Map.map, new Vector2(0,0), new Vector2(2,0));
+		//System.out.println(path);
 	}
 
 	
