@@ -25,8 +25,14 @@ public class Player {
 	//The speed of the player
 	public float speed;
 	
+	//The most health a player can have
 	public final int maxHealth = 10;
+	
+	//The health that the player currently has
 	public int health; 
+	
+	//The position in tiles where the player is at (used for path finding)
+	public static Vector2 tilePosition;
 
 	//For switching screens to the game over screen.
 	BearWithMe game;
@@ -89,6 +95,7 @@ public class Player {
 			}
 		}
 		
+		
 
 	}
 	
@@ -124,9 +131,12 @@ public class Player {
 				position.x -= movement;
 		}
 		
-		
 		//Adjust the sprite to the position
 		sprite.setPosition(position.x, position.y);
+		
+		//Update the tile position
+		tilePosition = new Vector2(convertFloatToWorld(position.x),
+				convertFloatToWorld(position.y));		
 	}
 
 	//Get the tile position of a value
@@ -153,8 +163,15 @@ public class Player {
 		//Top right corner collision
 		else if (getTile(position.x + sprite.getWidth(), position.y + sprite.getHeight()).isCollider)
 			return true;
+		//Mid-left point corner collision
+		else if (getTile(position.x, position.y + sprite.getHeight() / 2).isCollider)
+			return true;
+		//Mid-right point corner collision
+		else if (getTile(position.x + sprite.getWidth(), position.y + sprite.getHeight() / 2).isCollider)
+			return true;
 		else
 			return false;
+		
 	}
 	
 	//This should be called by other entities.

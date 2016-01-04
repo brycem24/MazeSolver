@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.brycemacinnis.bearwithme.entities.Zombie;
 
 public class GameScreen implements Screen {
 
@@ -21,7 +20,6 @@ public class GameScreen implements Screen {
 	
 	//Used for switching maps
 	BearWithMe bearWithMe;
-	Zombie zombie;
 	
 	public GameScreen(BearWithMe bearWithMe) {
 		map = new Map();
@@ -38,7 +36,6 @@ public class GameScreen implements Screen {
 		
 		//Create a quick bar separate from the camera to show health and other stats.
 		quickBar = new QuickBar();
-		zombie = new Zombie();
 
 	}
 	
@@ -62,11 +59,6 @@ public class GameScreen implements Screen {
 				
 		//Draw the player
 		player.render(batch);	
-		
-		//Draw the zombies
-		batch.begin();
-		zombie.render(batch);
-		batch.end();
 		
 		//Follow the player
 		cameraFollow();

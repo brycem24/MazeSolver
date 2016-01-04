@@ -19,20 +19,20 @@ public class Map {
 	
 	//The map that will be replaced by tiles
 	public static int[][] map = { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-								  { 0,1,1,3,3,3,3,1,1,1,1,1,1,1,1,0 },
-								  { 0,1,1,3,3,3,3,1,1,1,1,1,1,1,1,0 },
-								  { 0,1,1,3,3,3,3,2,1,1,1,1,1,1,1,0 },
-								  { 0,1,1,3,3,3,3,1,1,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-						   	      { 0,1,1,3,3,0,0,0,0,1,1,1,1,1,1,0 },
-						   	      { 0,1,1,3,3,0,0,0,0,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,3,3,0,0,0,0,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,2,1,1,1,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
-						   	  	  { 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0 },
+								  { 0,1,1,1,1,1,1,1,1,1,1,3,3,1,1,0 },
+								  { 0,1,1,2,2,2,2,1,1,1,3,3,1,3,1,0 },
+								  { 0,1,2,0,0,0,0,2,1,1,3,3,1,1,1,0 },
+								  { 0,1,2,0,0,0,0,2,1,1,1,1,1,1,1,0 },
+						   	  	  { 0,1,2,0,0,0,0,2,1,1,1,1,1,3,1,0 },
+						   	  	  { 0,1,2,0,0,0,2,1,1,3,3,3,3,1,1,0 },
+						   	  	  { 0,1,2,2,0,2,1,1,1,1,3,1,1,1,1,0 },
+						   	      { 0,1,1,2,2,1,1,1,1,1,1,1,3,3,1,0 },
+						   	      { 0,1,1,1,3,1,1,1,3,1,1,1,3,3,1,0 },
+						   	  	  { 0,1,1,3,3,3,1,1,3,3,1,1,1,3,1,0 },
+						   	  	  { 0,1,1,1,1,1,1,1,1,3,3,1,1,1,1,0 },
+						   	  	  { 0,1,3,3,3,1,1,1,1,1,3,1,1,1,1,0 },
+						   	  	  { 0,1,3,3,1,1,1,1,1,1,1,1,1,1,1,0 },
+						   	  	  { 0,1,1,3,1,1,1,1,1,1,1,1,1,1,1,0 },
 						   	  	  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }, };
 	
 	//The width and height of the map in pixels, for use in clamping the camera
@@ -56,13 +56,13 @@ public class Map {
 				Tile tile = null;
 				
 				if (map[i][j] == 0)
-					tile = new Tile("Water", tileTexture, Color.BLUE, i, j, true);
+					tile = new Tile("Water", tileTexture, DayNight.water, i, j, true);
 				else if (map[i][j] == 1)
-					tile = new Tile("Grass", tileTexture, Color.FOREST, i, j, false);
+					tile = new Tile("Grass", tileTexture, DayNight.grass, i, j, false);
 				else if (map[i][j] == 2)
-					tile = new Tile("Sand", tileTexture, Color.TAN, i, j, false);
+					tile = new Tile("Sand", tileTexture, DayNight.dirt, i, j, false);
 				else if (map[i][j] == 3)
-					tile = new Tile("Rock", tileTexture, Color.GRAY, i, j, true);
+					tile = new Tile("Rock", tileTexture, DayNight.rock, i, j, true);
 
 				//The map is effectively replaced with the tiles generated above
 				tiles[i][j] = tile;

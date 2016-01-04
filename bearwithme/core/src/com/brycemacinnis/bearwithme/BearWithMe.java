@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 
 public class BearWithMe extends Game {
 
+	DayNight dayNightSystem;
+	
 	@Override
 	public void create () {
 		
@@ -13,6 +15,8 @@ public class BearWithMe extends Game {
 		
 		//Start the game in the main menu
 		setScreen(new MainMenu(this));
+		
+		dayNightSystem = new DayNight();
 	}
 	
 	//Method that isn't needed but could be used for something in the future.
@@ -21,6 +25,9 @@ public class BearWithMe extends Game {
 		
 		//Necessary to see the other screens since the render function is overridden.
 		super.render();
+		
+		dayNightSystem.Tick();
+		
 	}
 	
 	
