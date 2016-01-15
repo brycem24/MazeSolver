@@ -8,7 +8,10 @@ using System.Threading;
 namespace Pathfinder
 {
 	public class Cell {
+		//The type of cell it is, 3 = wall.
 		public int Content;
+
+		//The position of a cell
 		public int X, Y;
 
 		public Cell(int x, int y, int content) {

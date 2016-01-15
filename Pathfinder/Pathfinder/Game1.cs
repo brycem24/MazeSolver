@@ -22,8 +22,12 @@ namespace Pathfinder
 		int width = 20;
 		int height = 20;
 
+		//The width and height of the map.
 		public static int mapWidth = 40;
 		public static int mapHeight = 40;
+
+		//The path finding algorithm
+		PathAlgorithm algorithm;
 
 		public Game1 ()
 		{
@@ -43,6 +47,7 @@ namespace Pathfinder
 			//Creates a maze with given width by height.
 			maze = new Maze (mapWidth, mapHeight);
 
+			//Create a new path finder given the maze.
 			algorithm = new PathAlgorithm (mapWidth, mapHeight);
 		}
 
@@ -62,15 +67,14 @@ namespace Pathfinder
 		protected override void Update (GameTime gameTime)
 		{
 			base.Update (gameTime);
+
+			//Left Mouse Button changes starting node, Right Mouse button changes end node.
 			HandleMouseInput ();
 		}
-
-
-
+			
+		//The starting position of a node, it is null only before the mouse has clicked both a start and an end point.
 		Vector2? startPos;
 		Vector2? goalPos;
-
-		PathAlgorithm algorithm;
 
 		protected override void Draw (GameTime gameTime)
 		{
@@ -78,12 +82,9 @@ namespace Pathfinder
 
 			//Texture for drawing primitive rectangles
 			Color[] colorData = new Color[width * height];
-
 			Texture2D rectangle = new Texture2D (graphics.GraphicsDevice, width, height); 
-
 			for (int i = 0; i < width * height; i++)
 				colorData [i] = Color.White;
-			
 			rectangle.SetData<Color> (colorData);
 
 			//Draw the maze
@@ -96,20 +97,21 @@ namespace Pathfinder
 				algorithm = new PathAlgorithm (mapWidth, mapHeight);
 				List<Vector2> path = algorithm.GetPath ((Vector2)startPos, (Vector2)goalPos);
 
+				//Draw the best path given the coordinates.
 				foreach (Vector2 vector in path) {
 					spriteBatch.Draw (rectangle, new Vector2 (vector.X * width, vector.Y * height), Color.Yellow);
 				}
 			}
 
-			//If the mouse cursor is in bounds and not over a wall
+			//This is rendered last to ensure the starting node and end node overwrites the best path.
+
+			//If the mouse cursor is in bounds and not over a wall and a starting point has been given
 			if (startPos.HasValue)
 				spriteBatch.Draw (rectangle, new Vector2 (startPos.Value.X * width, startPos.Value.Y * height), Color.Green);
 
-			//If the mouse cursor is in bounds and not over a wall
+			//If the mouse cursor is in bounds and not over a wall and an end point has been given
 			if (goalPos.HasValue)
 				spriteBatch.Draw (rectangle, new Vector2 (goalPos.Value.X * width, goalPos.Value.Y * height), Color.Red);
-
-
 
 			spriteBatch.End ();
 
@@ -134,10 +136,7 @@ namespace Pathfinder
 				//Set the end position
 				else if (mouseState.RightButton == ButtonState.Pressed)
 					goalPos = new Vector2(mousePosX, mousePosY);
-			
 			}
-
-
 		}
 	}
 }
