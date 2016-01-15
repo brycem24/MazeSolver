@@ -1,0 +1,8 @@
+A pathfinding implementation that finds the shortest path through the 
+maze to demonstrate my understanding of the basics of AI. The algorithm 
+used for pathfinding was the A* algorithm. The maze was 
+generated with the Growing Tree Algorithm in the style of the Recursive 
+Back Tracker Method. This was written in C#.
+
+Written from the start of winter break 2015, and finished in early 
+January 2016.
